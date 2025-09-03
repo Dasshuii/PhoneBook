@@ -1,7 +1,6 @@
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 
-namespace PhoneBook;
+namespace PhoneBook.Model;
 
 public class PhoneBookContext : DbContext
 {

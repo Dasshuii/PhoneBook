@@ -1,28 +1,62 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore;
+﻿using System.Threading.Tasks;
+using Microsoft.IdentityModel.Tokens;
+using PhoneBook.Model;
+using PhoneBook.Service;
+using PhoneBook.Util;
 
-namespace PhoneBook
+namespace PhoneBook;
+
+public class Program
 {
-    public class Program
+    public static void Main()
     {
-        public static async Task Main(string[] args)
+        string phoneNumber = Input.GetPhoneInput("Phone Number? (+506XXXX-XXXX)");
+        // var db = new PhoneBookContext();
+        // var phoneBookService = new PhoneBookService(db);
+
+        // bool exit = false;
+        // while (!exit)
+        // {
+        //     Menu.PrintMainMenu();
+        //     int opt = Input.GetIntegerInput("Opt?");
+
+        //     switch (opt)
+        //     {
+        //         case 1:
+        //             var contacts = await phoneBookService.GetAllContacts();
+        //             foreach (var registry in contacts)
+        //                 Console.WriteLine(registry);
+        //             break;
+        //         case 2:
+        //             var contact = GetContact();
+        //             await phoneBookService.AddContact(contact);
+        //             break;
+        //         case 3:
+        //             break;
+        //         case 4:
+        //             break;
+        //         case 0:
+        //             exit = true;
+        //             break;
+        //         default:
+        //             Console.WriteLine("Invalid option. Try again");
+        //             break;
+        //     }
+        // }
+
+    }
+
+    public static Contact GetContact()
+    {
+        string name = Input.GetUserInput("Name?");
+        string email = Input.GetEmailInput("Email? (example@mail.com)");
+        string phoneNumber = Input.GetPhoneInput("Phone Number? (+506 XXXX-XXXX)");
+
+        return new Contact
         {
-            using var db = new PhoneBookContext();
-
-            Console.WriteLine("Inserting new contact");
-            db.Add(new Contact
-            {
-                Name = "Chayotita",
-                Email = "chayotita@gmail.com",
-                PhoneNumber = "+50611111111"
-            });
-            await db.SaveChangesAsync();
-
-            Console.WriteLine("Querying for a contact");
-            var contact = await db.Contacts
-                .OrderBy(c => c.Id)
-                .FirstAsync();
-            Console.WriteLine(contact);
-        }
+            Name = name,
+            Email = email,
+            PhoneNumber = phoneNumber
+        };
     }
 }
