@@ -42,7 +42,7 @@ public class Input
 
     private static bool ValidEmail(string email)
     {
-        string pattern = @"^[a-z]+@[a-z]+.com$";
+        string pattern = @"^[a-z0-9]+@[a-z]+.com$";
         return Regex.IsMatch(email, pattern);
     }
 
